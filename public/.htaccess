@@ -1,0 +1,20 @@
+<IfModule mod_negotiation.c>
+  Options -MultiViews
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. Exclure explicitement les fichiers statiques
+  RewriteRule \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$ - [L]
+
+  # 2. Rediriger tout le reste vers index.html
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
+
+AddType application/javascript .js .mjs
+AddType text/css .css
+AddType image/x-icon .ico
